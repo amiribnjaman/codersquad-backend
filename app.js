@@ -13,6 +13,8 @@ app.use(express.json());
 // Routes
 // User route
 app.use("/api/v1/user", userRouter);
+// Task route
+app.use("/api/v1/task", taskRouter);
 
 // Testing route
 app.get("/", (req, res) => {
