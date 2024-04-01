@@ -1,12 +1,19 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const userRouter = require("./route/userRouter");
+const taskRouter = require("./route/taskRouter");
+require("./config/db");
+const jsonwebtokenAuth = require("./middleware/authorization");
 
 // Middlewares
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Routes
+// User route
+app.use("/api/v1/user", userRouter);
 
 // Testing route
 app.get("/", (req, res) => {
