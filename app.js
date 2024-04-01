@@ -1,10 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const userRouter = require("./route/userRouter");
-const taskRouter = require("./route/taskRouter");
-require("./config/db");
-const jsonwebtokenAuth = require("./middleware/authorization");
+const userRouter = require("./route/user.router");
+require("./config/db.config");
 
 // Middlewares
 app.use(cors());
