@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const userRouter = require("./route/user.router");
 require("./config/db.config");
+const jsonwebtokenAuth = require("./middleware/authorization");
 
 // Middlewares
 app.use(cors());
