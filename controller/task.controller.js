@@ -33,8 +33,7 @@ const getAllTask = async (req, res) => {
   }
 };
 
-
-// Create a new task API 
+// Create a new task API
 const createTask = async (req, res) => {
   const creatorEmail = req.decoded.email;
 
@@ -88,9 +87,21 @@ const updateTask = async (req, res) => {
   }
 };
 
+// Delete a task API
+const deleteTask = async (req, res) => {
+  const id = req.params.id;
+  try {
+    await Task.deleteOne({ id: id });
+    res.send({ status: 204, message: "Deleted successfully" });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   getOneTask,
   getAllTask,
   createTask,
   updateTask,
+  deleteTask,
 };
