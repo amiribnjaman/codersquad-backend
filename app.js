@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const userRouter = require("./route/user.router");
+const taskRouter = require("./route/task.router");
 require("./config/db.config");
 const jsonwebtokenAuth = require("./middleware/authorization");
 
@@ -10,11 +11,12 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Routes
+// Application level Routes
 // User route
 app.use("/api/v1/user", userRouter);
 // Task route
 app.use("/api/v1/task", taskRouter);
+
 
 // Testing route
 app.get("/", (req, res) => {
