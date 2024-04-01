@@ -61,8 +61,36 @@ const createTask = async (req, res) => {
   }
 };
 
+// Update a task API
+const updateTask = async (req, res) => {
+  const id = req.params.id;
+  const creatorEmail = req.decoded.email;
+
+  const { taskTitle, teamLeader, completion, teamMemberNum } = req.body;
+  try {
+    const update = {
+      taskTitle,
+      completion,
+      teamLeader,
+      teamMemberNum,
+    };
+    const updateTask = await Task.updateOne({ id, creatorEmail }, update, {
+      returnOriginal: false,
+    });
+    // const data = await updateTask.save();
+    if (updateTask) {
+      res.send({ status: 201, message: "created a new task", updateTask });
+    } else {
+      res.send({ status: 400, message: "something went wrong" });
+    }
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   getOneTask,
   getAllTask,
   createTask,
+  updateTask,
 };

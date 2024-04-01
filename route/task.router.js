@@ -4,6 +4,7 @@ const {
   getAllTask,
   getOneTask,
   createTask,
+  updateTask,
 } = require("../controller/task.controller");
 
 // Routes
