@@ -33,12 +33,12 @@ const getAllTask = async (req, res) => {
   }
 };
 
-// Create a new task API
+// Create a new task API 
 const createTask = async (req, res) => {
   const creatorEmail = req.decoded.email;
 
-  const { taskTitle, completion, teamLeader, teamMemberNum, teamMembers } =
-    req.body;
+  const { taskTitle, completion, teamLeader, teamMemberNum, teamMembers } = req.body;
+  console.log(req.body);
   try {
     const newTask = new Task({
       id: uuidv4(),
@@ -49,11 +49,12 @@ const createTask = async (req, res) => {
       teamMemberNum,
       teamMembers: ["Amir", "Tamim", "Zahid", "Jack"],
     });
-    const data = await newTask.save();
-    if (data) {
-      res.send({ status: 201, message: "created a new task", newTask });
+    const createdTask = await newTask.save();
+    console.log(createdTask)
+    if (createdTask) {
+      res.send({ status: 201, message: "Created a new task" });
     } else {
-      res.send({ statu: 400, message: "something went wrong" });
+      res.send({ status: 400, message: "something went wrong" });
     }
   } catch (error) {
     res.status(500).send(error.message);

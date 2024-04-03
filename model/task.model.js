@@ -21,7 +21,7 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  teamMemberNums: {
+  teamMemberNum: {
     type: String,
     required: true,
   },

@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const authorization = (req, res, next) => {
   const auth = req.headers.authorization;
+  const { id } = req.params;
   if (auth) {
     const TOKEN = auth.split(" ")[1];
     jwt.verify(
@@ -14,15 +15,13 @@ const authorization = (req, res, next) => {
         if (err) {
           return res.send({ status: 401, msg: "Unathorized Access" });
         } else {
-          //   req.decoded = decoded;
-          const creatorEmail = await Task.findOne({
-            creatorEmail: decoded.email,
-          });
-            if (creatorEmail) {
-                next();
-            } else {
-                return res.send({ status: 401, msg: "Unathorized Access!" });
-            }
+          // req.decoded = decoded;
+          const creatorEmail = await Task.findOne({ id });
+          if (creatorEmail == decoded.email) {
+            next();
+          } else {
+            return res.send({ status: 401, msg: "Unathorized Access!" });
+          }
         }
       }
     );
