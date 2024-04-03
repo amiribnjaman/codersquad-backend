@@ -23,7 +23,7 @@ const authorization = (req, res, next) => {
           } else {
             return res.send({
               status: 401,
-              msg: "Sorry, You're not Athorized to update!",
+              msg: "Unathorized Access!",
             });
           }
         }

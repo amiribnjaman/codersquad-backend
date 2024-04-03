@@ -22,6 +22,22 @@ const getAllTask = async (req, res) => {
   // const email = req.query.email;
   const { email } = req.decoded;
   try {
+    const tasks = await Task.find();
+    if (tasks) {
+      res.status(200).json(tasks);
+    } else {
+      res.status(400).json({ message: "something went wrong" });
+    }
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+// Get all task API
+const getAUserAllTask = async (req, res) => {
+  // const email = req.query.email;
+  const { email } = req.decoded;
+  try {
     const tasks = await Task.find({ creatorEmail: email });
     if (tasks) {
       res.status(200).json(tasks);
@@ -38,7 +54,6 @@ const createTask = async (req, res) => {
   const creatorEmail = req.decoded.email;
 
   const { taskTitle, completion, teamLeader, teamMemberNum, teamMembers } = req.body;
-  console.log(req.body);
   try {
     const newTask = new Task({
       id: uuidv4(),
@@ -50,7 +65,6 @@ const createTask = async (req, res) => {
       teamMembers: ["Amir", "Tamim", "Zahid", "Jack"],
     });
     const createdTask = await newTask.save();
-    console.log(createdTask)
     if (createdTask) {
       res.send({ status: 201, message: "Created a new task" });
     } else {
@@ -105,4 +119,5 @@ module.exports = {
   createTask,
   updateTask,
   deleteTask,
+  getAUserAllTask,
 };
