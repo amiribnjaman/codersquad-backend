@@ -16,11 +16,15 @@ const authorization = (req, res, next) => {
           return res.send({ status: 401, msg: "Unathorized Access" });
         } else {
           // req.decoded = decoded;
-          const creatorEmail = await Task.findOne({ id });
-          if (creatorEmail == decoded.email) {
+          const task = await Task.findOne({ id });
+          if (task.creatorEmail == decoded.email) {
+            req.decoded = decoded;
             next();
           } else {
-            return res.send({ status: 401, msg: "Unathorized Access!" });
+            return res.send({
+              status: 401,
+              msg: "Sorry, You're not Athorized to update!",
+            });
           }
         }
       }
