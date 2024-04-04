@@ -12,9 +12,9 @@ const authentication = require("../middleware/authentication")
 const authorization = require("../middleware/authorization");
 
 // Routes
+router.get("/my-task", authentication, getAUserAllTask);
 router.get("/", authentication, getAllTask);
 router.get("/:id", authentication, getOneTask);
-router.get("/my-task", authorization, getAUserAllTask);
 router.post("/", authentication, createTask);
 router.patch("/:id", authorization, updateTask);
 router.delete("/:id", authorization, deleteTask);

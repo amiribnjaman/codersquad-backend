@@ -19,7 +19,7 @@ const getOneTask = async (req, res) => {
 
 // Get all task API
 const getAllTask = async (req, res) => {
-  // const email = req.query.email;
+  console.log("all task");
   const { email } = req.decoded;
   try {
     const tasks = await Task.find();
@@ -35,7 +35,7 @@ const getAllTask = async (req, res) => {
 
 // Get all task API
 const getAUserAllTask = async (req, res) => {
-  // const email = req.query.email;
+  console.log('user task')
   const { email } = req.decoded;
   try {
     const tasks = await Task.find({ creatorEmail: email });
